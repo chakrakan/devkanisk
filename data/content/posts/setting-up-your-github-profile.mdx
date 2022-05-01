@@ -1,0 +1,104 @@
+---
+title: "Setting up your Github Profile as your portfolio"
+publishedAt: "November 14, 2020"
+description: "If you're in a hurry to get an online development portfolio setup without the hassle of building a dedicated website to highlight your projects, this is ones for you!"
+---
+
+<p align="center">
+  <Image
+    alt="Typing on a laptop"
+    src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80"
+    width={700}
+    height={400}
+    placeholder="blur"
+    blurDataURL="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80"
+  />
+</p>
+
+The job market in its current state is highly saturated, competitive, and becomes a numbers game, especially for entry level/new-grad positions. While this is mostly the case all year round, it is further amplified for now due to the pandemic.
+
+> There are clearly a lot of variables at play here, and well... time is of the essence!
+
+<p align="center">
+  <Image
+    alt="Big O Complexity"
+    src="https://victoria.dev/blog/a-coffee-break-introduction-to-time-complexity-of-algorithms/graph.png"
+    width={450}
+    height={400}
+    placeholder="blur"
+    blurDataURL="https://victoria.dev/blog/a-coffee-break-introduction-to-time-complexity-of-algorithms/graph.png"
+  />
+</p>
+
+As developers, we try to optimize things for efficiency/time/space. Similarly, the job-search process becomes increasingly difficult where you need to manage your time accordingly on the things you want to focus on for your betterment, while maximizing your chances of landing a new role.
+
+I remember when I was applying for my first job in the field, I spent so much time and emphasis into creating an online portfolio website in order to highlight my skills and projects; to have my own "corner" in the interwebs dedicated to myself.
+
+However, in hindsight, I probably would not have spent as much time on it, instead focusing on optimizing my resume, or picking up other technical/marketable skills.
+
+Here's a bit from [The Coding Career Handbook, by swyx](https://www.learninpublic.org/) (which I highly recommend, btw) that puts it perfectly:
+
+> You don’t need an all singing, all dancing portfolio page. You don’t need a verdant green commit history. People barely look at that. They don’t have time. You just have to demonstrate that you’ve Done Cool Shit and, optionally, Covered Your Bases. It’s more about instantly verifiable Proof of Work.
+
+_NOTE: the exception here is if your work is visual in nature such as UI/UX, front-end etc. You should definitely have an online portfolio if that's the case. If not a custom one, then at the very least, put some work up on sites like [Dribbble](https://dribbble.com/), [Behance](https://www.behance.net/) etc._
+
+Now, with the "proof of work" concept, what I do know is that most developers _SHOULD_ have a Github/Gitlab/Bitbucket etc. account where some of their code/work is posted publicly for potential recruiters and employers to see.
+
+I know some employers might skip looking at that as well, but I find that to be a perfectly reasonable tradeoff given most us should already be using [some sort of version control](https://www.anishathalye.com/2015/08/19/git-remote-dropbox/) by default.
+
+> There's 0 additional cost - in terms of your time and resources spent to set things up, as opposed to having a full-blown website in a fancy framework documenting your accomplishments.
+
+### Enter: Github's Special README.md
+
+Github launched a new feature not too long ago involving special repositories, where the `README.md` will not just show up in the repository itself, but also on top as part of your main profile!
+
+<p align="center">
+  <Image
+    alt="chakrakan/chakrakan github special repo"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/vwv2kjivuwwzs3mb8b55.PNG"
+    width={300}
+    height={150}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/vwv2kjivuwwzs3mb8b55.PNG"
+  />
+</p>
+
+We've had ample time to discover what could be done with such a feature, and, needless to say, there are numerous integrations thus far with varying range of customizability available at our disposal.
+
+Check out these resources to set up something cool for yourself:
+
+- example integrations found in [awesome-github-profile-readme's](https://github.com/abhisheknaiidu/awesome-github-profile-readme) repository hosted by [abhisheknaiidu](https://github.com/abhisheknaiidu),
+- ready-to-go templates for your profile at [Awesome-Profile-README-templates](https://github.com/kautukkundan/Awesome-Profile-README-templates) hosted by [kautukkundan](https://github.com/kautukkundan),
+- and some of the underlying tools that were used to create them, from the [Awesome-Readme](https://github.com/matiassingers/awesome-readme) hosted by [matiassingers](https://github.com/matiassingers).
+
+With the above in mind, I wanted to share my own take on having such a Github profile, which is set-up as my de-facto portfolio page which you can visit at [github.com/chakrakan](github.com/chakrakan) to see for yourself!
+
+<p align="center">
+  <Image
+    alt="chakrakan's Github repository"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/7uvn7i3jw1318i9ome8o.gif"
+    width={700}
+    height={350}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/7uvn7i3jw1318i9ome8o.gif"
+  />
+</p>
+
+_NOTE: I use a plug-in for Chrome called [Dark Reader](https://darkreader.org/) which pretty much simulates dark-mode for every website out there_
+
+I accomplished this by leveraging [Octokit](https://developer.github.com/v3/libraries/) to communicate with the Github APIs and updating content like gists, in combination with using [CircleCI](https://circleci.com/) to set up cron jobs that will constantly update content with new data. This is put together with the public profile `README.md` to create a profile page which contains:
+
+- relevant links and descriptions about myself,
+- dynamically updating info about my physical activity from Strava - [repo](https://github.com/chakrakan/strava-box),
+- dynamically updating info about my recent listening trends from Spotify - [repo](https://github.com/chakrakan/spotify-box),
+- dynamically updating info about what languages I've been working with in the last few days - [repo](https://github.com/chakrakan/waka-box).
+
+These repos are my fine-tuned/modified forks of the originals which have updated settings that just work out of the box vs the initial tampering I had to do with some of them to get them working.
+
+They contain explanations to get you setup with your own versions, but feel free to look through the code, provide feedback/suggestions, and fork them further and customize as per your needs!
+
+You can also reach out to me if you need help setting them up for your own profile. I'm active on discord where you can find me as `kan#0979`.
+
+Lastly, I'd love to know your opinions/stories/outcomes of having a personal portfolio and how much importance you personally give to that aspect of the job-application process. What helped you most in landing a job? Also, feel free to share your own Github Profile if you have one, so I can check them out and feel inspired further!
+
+Thanks for reading!

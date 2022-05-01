@@ -4,6 +4,12 @@ const nextConfig = withContentlayer({
   reactStrictMode: true,
   swcMinify: true,
   images: {
+    domains: [
+      "images.unsplash.com",
+      "dev-to-uploads.s3.amazonaws.com",
+      "victoria.dev",
+      "149695847.v2.pressablecdn.com",
+    ],
     formats: ["image/avif", "image/webp"],
   },
 });

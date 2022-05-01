@@ -1,0 +1,242 @@
+---
+title: "Installing and configuring ElasticSearch on a VM"
+publishedAt: "November 16, 2020"
+description: "Installing and configuring ElasticSearch on a VM"
+---
+
+For this guide, we will setup a virtual Ubuntu Server environment in order to best simulate the conditions of working with ElasticSearch in the real world, which would be primarily a cloud or containerized environment.
+
+We will utilize the terminal and I'll walk you through the steps and clarify as we go along!
+
+Things you will need:
+
+- a virtualization enabled local system
+- the [Ubuntu Server](https://ubuntu.com/download/server) `.iso`
+- [VirtualBox](https://www.virtualbox.org/)
+
+### Setting up the VM
+
+This part is fairly straightforward and visual in nature, and if not, there are plenty of Youtube videos and guides on how to create and setup your own VirtualBox VM. Regardless, I'll try to give you the core steps here so you don't have to navigate elsewhere as you follow through!
+
+First, make sure you've downloaded all the above components, and installed VirtualBox. I'll be doing this on a Mac system, but the process should be fairly similar on any other OS.
+
+Once that is done, create a new VM:
+
+<p align="center">
+  <Image
+    alt="VirtualBox create New VM"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/nrf4420ac9cc6ozy092b.png"
+    width={600}
+    height={100}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/nrf4420ac9cc6ozy092b.png"
+  />
+</p>
+
+- Click on `New` and follow the instructions within the prompts, and feel free to customize the name and installation directory as necessary
+- From the drop-down, make sure to select Ubuntu (64 bit)
+- Allocate memory size close to half of your total current system
+- Create a virtual hard disk (VDI) and configure at least 20 GB of space
+
+Once that's done, you will see the VM show up in the main screen, and you can simply select the VM, and click the green `Start` button to kick things off.
+
+<p align="center">
+  <Image
+    alt="VirtualBox start VM"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/xtosu6i2b4ygok9bplvg.png"
+    width={450}
+    height={120}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/xtosu6i2b4ygok9bplvg.png"
+  />
+</p>
+
+Immediately after, you will be asked to `Select a start-up disk`. This is where you want to click the folder icon and navigate to where your Ubuntu Server `.iso` file is and confirm the prompt.
+
+### Instaling Ubuntu Server
+
+This process is akin to sticking an installation disk/bootable USB to install any OS, so you'll have a nice guided prompt which will look something like this:
+
+<p align="center">
+  <Image
+    alt="Installing ubuntu server"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/ls9l13g7ywnjqkf6zzvw.png"
+    width={700}
+    height={520}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/ls9l13g7ywnjqkf6zzvw.png"
+  />
+</p>
+
+I won't cover this in depth since this is also fairly straightforward, but will highlight specific things you will/won't need:
+
+- you won't need a proxy config (unless you're on your work machine which is behind a proxy)
+- Use the default mirror for ubuntu
+- Use the entire disk for the Filesystem setup and confirm the "destructive action" prompt (it's a VM so we're at no risk of messing up any of our local data)
+- Setup your profile with your name, server name etc.
+- When the prompt asks for SSH setup, make sure to check [x] Install Open SSH server
+- You won't need any featured server snaps since we're installing stuff manually
+
+And that should be all for this step. Once the process is complete it'll ask for a reboot which will then bring you to your VM with Ubuntu Server starting up.
+
+### Installing ElasticSearch
+
+First, we import the ElasticSearch GPG key since they sign all their packages with the following signing key (PGP key D88E42B4, available from https://pgp.mit.edu).
+
+To do so, use
+
+```shell
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+```
+
+<p align="center">
+  <Image
+    alt="importing elastic gpg key before install"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/laluncmmntam5no05dyc.png"
+    width={700}
+    height={75}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/laluncmmntam5no05dyc.png"
+  />
+</p>
+
+Next, we need to run
+
+```shell
+sudo apt-get install apt-transport-https
+```
+
+in order to grab the apt-transport-https package for downloading content via the HTTP Secure protocol (HTTPS).
+
+We then echo the repository definition which is piped and saved to `/etc/apt/sources.list.d/elastic-7.x.list` using a [`tee`](https://www.geeksforgeeks.org/tee-command-linux-example/) command:
+
+```shell
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+```
+
+And finally, we update and grab the elasticsearch package
+
+```shell
+sudo apt-get update && sudo apt-get install elasticsearch
+```
+
+### Configuring our new Elastic installation
+
+Once the installation is complete, we can quickly configure it by using vi
+
+```shell
+sudo vi /etc/elasticsearch/elasticsearch.yml
+```
+
+This will open up the config file where we will change/uncomment the following params (make sure you're in insert mode in vi):
+
+- uncomment `node.name` and optionally edit the name
+- uncomment `network.host` and edit it to point to `0.0.0.0`
+- uncomment `discovery.seed_hosts` and edit it to `["127.0.0.1"]`
+- uncomment `cluster.initial_master_nodes` and edit it to match the same name as your `node.name`, e.g. if my `node.name` was the default `node-1`, then this field should have value `["node-1"]`
+
+Hit `Esc` to get out of insert mode and type `:wq` to save our changes and exit vi.
+
+<p align="center">
+  <Image
+    alt="configuring elasticsearch in vi"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/sebt7xkofg22gp5jf76v.png"
+    width={700}
+    height={550}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/sebt7xkofg22gp5jf76v.png"
+  />
+</p>
+
+#### Optionally (auto-run on system start)
+
+We can set up a worker daemon to start up elasticsearch when our VM starts up using:
+
+`sudo /bin/systemctl daemon-reload`
+`sudo /bin/systemctl enable elasticsearch.service`
+
+<p align="center">
+  <Image
+    alt="setup autorun worker daemon to start up elasticsearch"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/g7n8adsgff1e50w0lz3t.png"
+    width={700}
+    height={120}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/g7n8adsgff1e50w0lz3t.png"
+  />
+</p>
+
+and finally starting the process using:
+
+`sudo /bin/systemctl start elasticsearch.service`
+
+Give it a minute or so to start up, and then we can send in the following cURL request to verify and see if our elasticsearch instance is up and running:
+
+`curl -XGET 127.0.0.1:9200`
+
+If all went well, you should see the following response with the default tagline "You Know, for Search".
+
+<p align="center">
+  <Image
+    alt="You know for search result from query"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/270hbu7tx0yh1a3ebwm6.png"
+    width={700}
+    height={300}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/270hbu7tx0yh1a3ebwm6.png"
+  />
+</p>
+
+Now you have a proper working installation of Elasticsearch 7 configured on a VM!
+
+In order to interface with the instance outside of the VM, we need to setup port-forwarding, which we can do by going into our VMs Settings>Networking>Advanced>Port Forwarding
+
+<p align="center">
+  <Image
+    alt="setting up port forwarding 1"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/txdzf3gxwck6k8evfzju.png"
+    width={700}
+    height={400}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/txdzf3gxwck6k8evfzju.png"
+  />
+</p>
+
+<p align="center">
+  <Image
+    alt="setting up port forwarding 2"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/xw77ucmqxyrm0jnhoesy.png"
+    width={700}
+    height={550}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/xw77ucmqxyrm0jnhoesy.png"
+  />
+</p>
+
+then add new rules where you configure the host and guest ports as follows
+
+<p align="center">
+  <Image
+    alt="add host and guest port rules"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/3rqr8pwfm8j6ff9qtnr3.png"
+    width={700}
+    height={250}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/3rqr8pwfm8j6ff9qtnr3.png"
+  />
+</p>
+
+Now, as long as your VM is running, you can SSH into it from your host machine using PuTTY (if you're on Windows) or `ssh your_vm_username@127.0.0.1 -p 2222` like below
+
+<p align="center">
+  <Image
+    alt="ssh into elastic container"
+    src="https://dev-to-uploads.s3.amazonaws.com/i/lk3ose5dvmx0rvpsru3e.png"
+    width={700}
+    height={500}
+    placeholder="blur"
+    blurDataURL="https://dev-to-uploads.s3.amazonaws.com/i/lk3ose5dvmx0rvpsru3e.png"
+  />
+</p>
+
+and then enter your password to login, and continue interfacing with your Elastic cluster from your host machine!

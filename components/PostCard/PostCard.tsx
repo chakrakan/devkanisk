@@ -26,7 +26,7 @@ export default function PostCard({ post }: PostCardProps) {
           <div className="flex-shrink-0 hidden ml-2 sm:block">
             <Image
               className="object-cover w-16 h-16 rounded-full shadow-sm dark:bg-zinc-400"
-              src="/static/dk-small.svg"
+              src="/static/images/dk-small.svg"
               width={64}
               height={64}
               alt="Devkanisk"

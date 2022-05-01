@@ -21,7 +21,7 @@ export default function BlogPost({ children, post }: BlogPostProps) {
             <span>{post.readingTime ? ` · ${post.readingTime.text}` : ""}</span>
           </p>
         </div>
-        <div className="entry">{children}</div>
+        <div className="entry dark:prose-code:text-zinc-300">{children}</div>
       </article>
     </SeoContainer>
   );
