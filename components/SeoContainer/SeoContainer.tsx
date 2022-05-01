@@ -8,6 +8,9 @@ type SeoContainerProps = PropsWithChildren<{
   description: string;
   url: string;
   publishedAt?: string;
+  image?: string;
+  imgWidth?: string;
+  imgHeight?: string;
 }>;
 
 export default function SeoContainer({
@@ -16,6 +19,9 @@ export default function SeoContainer({
   description,
   url,
   publishedAt,
+  image = socials.heroImage,
+  imgWidth = "800",
+  imgHeight = "600",
 }: SeoContainerProps) {
   const router = useRouter();
   const date = useMemo(
@@ -25,6 +31,8 @@ export default function SeoContainer({
         : new Date().toISOString(),
     [publishedAt]
   );
+
+  const img = useMemo(() => image.replace(/\.webp$/, ".svg"), [image]);
 
   return (
     <>
@@ -39,13 +47,17 @@ export default function SeoContainer({
         {/* schema.org */}
         <meta itemProp="name" content={title} />
         <meta itemProp="description" content={description} />
+        <meta itemProp="image" content={img} />
 
         {/*  Open Graph */}
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
         <meta property="og:description" content={description} />
-
+        <meta property="og:image" content={img} />
+        <meta property="og:image:type" content="image/svg" />
+        <meta property="og:image:width" content={imgWidth} />
+        <meta property="og:image:height" content={imgHeight} />
         <meta property="og:image:alt" content={description} />
 
         {/* Twitter */}
@@ -54,10 +66,11 @@ export default function SeoContainer({
         <meta name="twitter:creator" content="@devkanisk" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={image} />
 
-        <meta property="article:published_time" content={date} />
-        <meta property="article:section" content="Article Section" />
-        <meta property="article:tag" content="Article Tag" />
+        <meta property="post:published_time" content={date} />
+        <meta property="post:section" content="Post Section" />
+        <meta property="post:tag" content="Post Tag" />
       </Head>
       {children}
     </>

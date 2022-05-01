@@ -9,9 +9,9 @@ type BlogPostProps = {
 export default function BlogPost({ children, post }: BlogPostProps) {
   return (
     <SeoContainer
-      title={post.title}
+      title={`${post.title} | devkanisk`}
       description={post.description}
-      url={`https://next-js-mdx-starter.vercel.app/posts/${post.slug}`}
+      url={`https://devkanisk.com/posts/${post.slug}`}
     >
       <article>
         <div>

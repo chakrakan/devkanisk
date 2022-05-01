@@ -5,7 +5,7 @@ import { PostCard, SeoContainer } from "components";
 export default function Posts({ posts }: { posts: Post[] }) {
   return (
     <SeoContainer
-      title={"NextJS Contentlayer Starter"}
+      title={"Posts | devkanisk"}
       description={
         "A starter template for NextJS leveraging Contentlayer + MDX to get you started fast!"
       }

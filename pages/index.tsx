@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 const Home: NextPage = () => {
   return (
     <SeoContainer
-      title={"NextJS Contentlayer Starter"}
+      title={"Home | devkanisk"}
       description={
         "A starter template for NextJS leveraging Contentlayer + MDX to get you started fast!"
       }
