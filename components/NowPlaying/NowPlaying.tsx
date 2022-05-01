@@ -5,6 +5,7 @@ import Image from "next/image";
 
 export default function NowPlaying() {
   const { data } = useSWR<NowPlayingSong>("/api/now-playing", fetcher);
+  console.log(data);
   // "not-playing";
   return (
     <>
