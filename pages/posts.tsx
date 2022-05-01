@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { allPosts, Post } from "../.contentlayer/generated/";
 import "prismjs/themes/prism-tomorrow.css";
-import { SeoContainer } from "components";
+import { PostCard, SeoContainer } from "components";
 
 export default function Posts({ posts }: { posts: Post[] }) {
   return (
@@ -14,33 +13,8 @@ export default function Posts({ posts }: { posts: Post[] }) {
     >
       <div>
         <h1>Posts</h1>
-        {posts.map(({ title, description, slug }) => (
-          <Link passHref key={`posts/${slug}`} href={`posts/${slug}`}>
-            <div
-              className="
-                    group
-                    rounded
-                    p-2
-                    font-medium
-                    transition
-                    ease-in-out
-                    mb-4
-                    hover:cursor-pointer
-                    hover:shadow-md
-                    dark:hover:shadow-none"
-            >
-              <p className="m-0">
-                <a
-                  className="text-blue-700 hover:text-blue-900"
-                  aria-label={title}
-                >
-                  <b>{title}</b>
-                </a>
-                <br />
-                {description}
-              </p>
-            </div>
-          </Link>
+        {posts.map((post) => (
+          <PostCard post={post} key={post._id} />
         ))}
       </div>
     </SeoContainer>
