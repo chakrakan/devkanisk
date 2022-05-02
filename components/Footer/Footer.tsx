@@ -6,11 +6,13 @@ export default function Footer() {
     <footer className="prose mt-6">
       <hr className="w-full border-1 border-gray-200 dark:border-zinc-500 mb-8" />
       <NowPlaying />
-      <div className="text-gray-600 dark:text-zinc-400 py-2 text-base space-y-4">
-        <div className="flex justify-between mb-5">
-          <p>&copy; {new Date().getFullYear()} Kanisk Chakraborty</p>
+      <div className="text-gray-600 dark:text-zinc-400 text-base space-y-4">
+        <div className="flex justify-between">
+          <p className="mt-1">
+            &copy; {new Date().getFullYear()} Kanisk Chakraborty
+          </p>
           <br />
-          <div className="flex space-x-2">
+          <div className="flex space-x-1">
             <CustomLink
               className="!text-sky-400"
               href="https://twitter.com/devkanisk"

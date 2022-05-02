@@ -32,19 +32,21 @@ export default function Home({ mostRecent }: HomeProps) {
             <h1 className="text-3xl md:text-5xl tracking-tight mb-1 text-black dark:text-white">
               @devkanisk
             </h1>
-            <h5 className="text-gray-700 dark:text-zinc-200 mb-4">
-              Software Engineer at{" "}
-              <CustomLink
-                href="https://www.waveapps.com/"
-                aria-label="Waveapps website"
-              >
-                <span className="font-semibold">Wave</span>
-              </CustomLink>
-            </h5>
-            <p className="text-gray-600 dark:text-gray-400 mb-16">
-              Full Stack Software Engineer based in Toronto, Canada, currently
-              working remotely within the Finance and eCommerce sectors.
-            </p>
+            <section>
+              <h5 className="text-gray-700 dark:text-zinc-200 mb-4">
+                Software Engineer at{" "}
+                <CustomLink
+                  href="https://www.waveapps.com/"
+                  aria-label="Waveapps website"
+                >
+                  <span className="font-semibold">Wave</span>
+                </CustomLink>
+              </h5>
+              <p className="text-gray-600 dark:text-gray-400 mb-16">
+                Full Stack Software Engineer based in Toronto, Canada, currently
+                working remotely within the Finance and eCommerce sectors.
+              </p>
+            </section>
           </div>
           <div className="w-[80px] sm:w-[176px] relative mb-8 sm:mb-0 mr-auto">
             <Image
@@ -58,36 +60,40 @@ export default function Home({ mostRecent }: HomeProps) {
             />
           </div>
         </div>
-        <h5 className="font-bold text-2xl md:text-4xl tracking-tight mb-2 text-black dark:text-white">
-          Recent Posts
-        </h5>
-        <ul className="flex flex-col">
-          {mostRecent.map((post: Post) => (
-            <li key={post.slug}>
-              <CustomLink href={`/posts/${post.slug}`}>{post.title}</CustomLink>
-            </li>
-          ))}
-        </ul>
-        <CustomLink
-          href="/posts"
-          className="flex mt-2 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
-        >
-          Read all posts
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="h-6 w-6 ml-1"
+        <section>
+          <h5 className="font-bold text-2xl md:text-4xl tracking-tight mb-2 text-black dark:text-white">
+            Recent Posts
+          </h5>
+          <ul className="flex flex-col">
+            {mostRecent.map((post: Post) => (
+              <li key={post.slug}>
+                <CustomLink href={`/posts/${post.slug}`}>
+                  {post.title}
+                </CustomLink>
+              </li>
+            ))}
+          </ul>
+          <CustomLink
+            href="/posts"
+            className="flex mt-2 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
           >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
-            />
-          </svg>
-        </CustomLink>
+            Read all posts
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="h-6 w-6 ml-1"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
+              />
+            </svg>
+          </CustomLink>
+        </section>
       </div>
     </SeoContainer>
   );
