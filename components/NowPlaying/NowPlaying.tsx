@@ -8,7 +8,7 @@ export default function NowPlaying() {
   // "not-playing";
   return (
     <>
-      <div className="not-prose mt-5 rounded py-4 flex text-base items-center">
+      <div className="not-prose rounded flex text-base items-center">
         {data?.isPlaying ? (
           <>
             <Image
@@ -19,7 +19,7 @@ export default function NowPlaying() {
               height={64}
               key={data.title}
             ></Image>
-            <p className="ml-5 whitespace-nowrap overflow-scroll dark:text-slate-400">
+            <p className="ml-3 mt-3.5 whitespace-nowrap overflow-scroll dark:text-slate-400">
               <a
                 className="font-bold dark:text-slate-300"
                 rel="noreferrer"
