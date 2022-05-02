@@ -33,7 +33,7 @@ export default function Home({ mostRecent }: HomeProps) {
               @devkanisk
             </h1>
             <section>
-              <h5 className="text-gray-700 dark:text-zinc-200 mb-4">
+              <h2 className="text-gray-700 mt-3 dark:text-zinc-200 mb-4">
                 Software Engineer at{" "}
                 <CustomLink
                   href="https://www.waveapps.com/"
@@ -41,7 +41,7 @@ export default function Home({ mostRecent }: HomeProps) {
                 >
                   <span className="font-semibold">Wave</span>
                 </CustomLink>
-              </h5>
+              </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-16">
                 Full Stack Software Engineer based in Toronto, Canada, currently
                 working remotely within the Finance and eCommerce sectors.
@@ -60,10 +60,10 @@ export default function Home({ mostRecent }: HomeProps) {
             />
           </div>
         </div>
-        <section>
-          <h5 className="font-bold text-2xl md:text-4xl tracking-tight mb-2 text-black dark:text-white">
+        <section className="-mt-10">
+          <h2 className="font-bold mt-1 md:text-4xl tracking-tight mb-1 text-black dark:text-white">
             Recent Posts
-          </h5>
+          </h2>
           <ul className="flex flex-col">
             {mostRecent.map((post: Post) => (
               <li key={post.slug}>
