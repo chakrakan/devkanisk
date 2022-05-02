@@ -8,7 +8,7 @@ type PostCardProps = {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <CustomLink key={`posts/${post.slug}`} href={`posts/${post.slug}`}>
+    <CustomLink key={`posts/${post.slug}`} href={`/posts/${post.slug}`}>
       <a
         className="relative block p-8 overflow-hidden border border-gray-100 rounded-lg mt-6"
         aria-label={post.title}
