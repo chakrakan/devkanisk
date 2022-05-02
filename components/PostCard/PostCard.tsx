@@ -1,6 +1,6 @@
 import { Post } from ".contentlayer/generated";
+import CustomLink from "components/CustomLink/CustomLink";
 import Image from "next/image";
-import Link from "next/link";
 
 type PostCardProps = {
   post: Post;
@@ -8,7 +8,7 @@ type PostCardProps = {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <Link passHref key={`posts/${post.slug}`} href={`posts/${post.slug}`}>
+    <CustomLink key={`posts/${post.slug}`} href={`posts/${post.slug}`}>
       <a
         className="relative block p-8 overflow-hidden border border-gray-100 rounded-lg mt-6"
         aria-label={post.title}
@@ -63,6 +63,6 @@ export default function PostCard({ post }: PostCardProps) {
           </div>
         </dl>
       </a>
-    </Link>
+    </CustomLink>
   );
 }
