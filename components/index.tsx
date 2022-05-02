@@ -4,5 +4,14 @@ import CustomLink from "./CustomLink/CustomLink";
 import MDXComponents from "./MDXComponents/MDXComponents";
 import SeoContainer from "./SeoContainer/SeoContainer";
 import PostCard from "./PostCard/PostCard";
+import Tag from "./Tag/Tag";
 
-export { Base, BlogPost, CustomLink, MDXComponents, SeoContainer, PostCard };
+export {
+  Base,
+  BlogPost,
+  CustomLink,
+  MDXComponents,
+  SeoContainer,
+  PostCard,
+  Tag,
+};

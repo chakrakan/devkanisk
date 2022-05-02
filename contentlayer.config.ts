@@ -2,6 +2,7 @@ import {
   defineDocumentType,
   makeSource,
   ComputedFields,
+  defineNestedType,
 } from "contentlayer/source-files";
 import readingTime from "reading-time";
 import rehypePrism from "rehype-prism-plus";
@@ -22,6 +23,13 @@ export const computedFields: ComputedFields = {
     resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
   },
 };
+
+const Tag = defineNestedType(() => ({
+  name: "Tag",
+  fields: {
+    title: { type: "string", required: true },
+  },
+}));
 
 export const Post = defineDocumentType(() => ({
   name: "Post",
@@ -48,10 +56,11 @@ export const Post = defineDocumentType(() => ({
       description: "Path to a cover image for your post",
       required: false,
     },
-    category: {
-      type: "string",
-      description: "A category for your post",
+    tags: {
+      type: "list",
+      description: "Tags for your post",
       required: false,
+      of: Tag,
     },
   },
   computedFields,
