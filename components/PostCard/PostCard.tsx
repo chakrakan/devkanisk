@@ -19,7 +19,7 @@ export default function PostCard({ post }: PostCardProps) {
       <div className="justify-between sm:flex">
         <div>
           <h5 className="text-xl font-bold text-sky-400">{post.title}</h5>
-          <p className="mt-1 text-xs font-medium text-gray-600 dark:text-zinc-400">
+          <p className="mt-1 text-xs font-medium text-gray-600 dark:text-zinc-300">
             By Kanisk Chakraborty
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function PostCard({ post }: PostCardProps) {
       </div>
 
       <div className="mt-0 sm:pr-8">
-        <p className="text-sm text-gray-500 dark:text-zinc-500">
+        <p className="text-sm text-gray-500 dark:text-zinc-300">
           {post.description}
         </p>
       </div>
@@ -46,14 +46,14 @@ export default function PostCard({ post }: PostCardProps) {
           <dt className="text-sm font-medium text-gray-600 dark:text-zinc-400">
             Published
           </dt>
-          <dd className="text-xs text-gray-500">{post.publishedAt}</dd>
+          <dd className="text-xs text-zinc-400">{post.publishedAt}</dd>
         </div>
 
         <div className="flex flex-col-reverse ml-3 sm:ml-6">
           <dt className="text-sm font-medium text-gray-600 dark:text-zinc-400">
             Reading Time
           </dt>
-          <dd className="text-xs text-gray-500">
+          <dd className="text-xs text-zinc-400">
             {post.readingTime
               ? `${post.readingTime.text.substring(
                   0,
