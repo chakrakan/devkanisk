@@ -57,6 +57,7 @@ export default function Home({ mostRecent }: HomeProps) {
               height={176}
               placeholder="blur"
               blurDataURL="/static/images/devkanisk.jpg"
+              priority
             />
           </div>
         </div>

@@ -11,7 +11,7 @@ const nextConfig = withContentlayer({
       "149695847.v2.pressablecdn.com",
       "i.scdn.co",
     ],
-    formats: ["image/avif", "image/webp"],
+    formats: ["image/webp", "image/avif"],
   },
 });
 
