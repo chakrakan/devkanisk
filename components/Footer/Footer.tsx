@@ -16,6 +16,7 @@ export default function Footer() {
             <CustomLink
               className="!text-sky-400"
               href="https://twitter.com/devkanisk"
+              aria-label="Twitter devkanisk"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -35,6 +36,7 @@ export default function Footer() {
             <CustomLink
               className="!text-blue-500"
               href="https://linkedin.com/in/kaniskc"
+              aria-label="Linkedin Kanisk Chakraborty"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -54,6 +56,7 @@ export default function Footer() {
             <CustomLink
               className="!text-[#171515]"
               href="https://github.com/chakrakan"
+              aria-label="Github chakrakan"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
