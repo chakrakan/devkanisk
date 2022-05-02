@@ -63,9 +63,9 @@ export default function Home({ mostRecent }: HomeProps) {
         </h5>
         <ul className="flex flex-col">
           {mostRecent.map((post: Post) => (
-            <CustomLink key={post.slug} href={`/posts/${post.slug}`}>
-              <li key={post.slug}>{post.title}</li>
-            </CustomLink>
+            <li key={post.slug}>
+              <CustomLink href={`/posts/${post.slug}`}>{post.title}</CustomLink>
+            </li>
           ))}
         </ul>
         <CustomLink
