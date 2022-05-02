@@ -15,8 +15,8 @@ export default function NowPlaying() {
               className="w-16 h-16 rounded"
               src={data.albumImageUrl}
               alt={data.title}
-              width={64}
-              height={64}
+              width={128}
+              height={128}
               key={data.title}
             ></Image>
             <p className="ml-3 mt-3.5 whitespace-nowrap overflow-scroll dark:text-slate-400">

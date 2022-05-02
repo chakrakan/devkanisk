@@ -20,7 +20,7 @@ export default function BlogPost({ children, post }: BlogPostProps) {
           <div className="flex flex-wrap">
             Tags:&nbsp;
             {post.tags?.map((tag) => (
-              <Tag key={tag._id} title={tag.title} />
+              <Tag key={tag.title} title={tag.title} />
             ))}
           </div>
           <p>
