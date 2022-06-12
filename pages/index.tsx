@@ -62,8 +62,9 @@ export default function Home({ mostRecent }: HomeProps) {
           </div>
         </div>
       </section>
+      <hr className="my-1 border-1 border-gray-200 dark:border-zinc-500" />
       <section>
-        <h2 className="font-bold md:text-4xl mb-1 text-black dark:text-white">
+        <h2 className="mt-4 font-bold md:text-4xl mb-1 text-black dark:text-white">
           Recent Posts
         </h2>
         <ul className="flex flex-col">
