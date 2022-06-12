@@ -3,8 +3,8 @@ import NowPlaying from "components/NowPlaying/NowPlaying";
 
 export default function Footer() {
   return (
-    <footer className="prose mt-6">
-      <hr className="w-full border-1 border-gray-200 dark:border-zinc-500 mb-5" />
+    <footer className="prose mt-5">
+      <hr className="w-full border-1 border-gray-400 dark:border-zinc-500 mb-4" />
       <NowPlaying />
       <div className="text-gray-600 dark:text-zinc-400 text-base space-y-4">
         <div className="flex justify-between">

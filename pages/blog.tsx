@@ -1,8 +1,12 @@
 import { Post } from "../.contentlayer/generated";
 import { PostCard, SeoContainer } from "components";
-import { sortedPosts as posts } from "lib/helpers";
+import { sortedBlogPosts as posts } from "lib/helpers";
 
-export default function Blog({ posts }: { posts: Post[] }) {
+type BlogProps = {
+  posts: Post[];
+};
+
+export default function Blog({ posts }: BlogProps) {
   return (
     <div>
       <SeoContainer

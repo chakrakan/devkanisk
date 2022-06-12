@@ -1,6 +1,6 @@
 import { Post } from ".contentlayer/generated";
 import { CustomLink, SeoContainer } from "components";
-import { sortedPosts } from "lib/helpers";
+import { sortedBlogPosts } from "lib/helpers";
 import type { GetStaticProps } from "next";
 import Image from "next/image";
 
@@ -9,7 +9,7 @@ type HomeProps = {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const mostRecent = sortedPosts.slice(0, 3);
+  const mostRecent = sortedBlogPosts.slice(0, 3);
   return {
     props: {
       mostRecent,
@@ -62,15 +62,15 @@ export default function Home({ mostRecent }: HomeProps) {
           </div>
         </div>
       </section>
-      <hr className="my-1 border-1 border-gray-200 dark:border-zinc-500" />
+      <hr className="my-1 border-1 border-gray-400 dark:border-zinc-500" />
       <section>
-        <h2 className="mt-4 font-bold md:text-4xl mb-1 text-black dark:text-white">
-          Recent Posts
+        <h2 className="mt-4 font-bold md:text-3xl mb-1 text-black dark:text-white">
+          Recent Blog Posts
         </h2>
         <ul className="flex flex-col">
           {mostRecent.map((post: Post) => (
             <li key={post.slug}>
-              <CustomLink href={`/posts/${post.slug}`}>{post.title}</CustomLink>
+              <CustomLink href={`/blog/${post.slug}`}>{post.title}</CustomLink>
             </li>
           ))}
         </ul>
