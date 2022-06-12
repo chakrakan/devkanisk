@@ -33,7 +33,7 @@ export default function Home({ mostRecent }: HomeProps) {
               @devkanisk
             </h1>
             <section>
-              <h2 className="text-gray-700 mt-3 dark:text-zinc-200 mb-4">
+              <h2 className="text-gray-700 mt-3 dark:text-zinc-200">
                 Software Engineer at{" "}
                 <CustomLink
                   href="https://www.waveapps.com/"
@@ -42,7 +42,7 @@ export default function Home({ mostRecent }: HomeProps) {
                   <span className="font-semibold">Wave</span>
                 </CustomLink>
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-16">
+              <p className="text-gray-600 dark:text-gray-400">
                 Full Stack Software Engineer based in Toronto, Canada, currently
                 working remotely within the Finance and eCommerce sectors.
               </p>

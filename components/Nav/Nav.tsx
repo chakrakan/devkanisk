@@ -6,8 +6,8 @@ export default function Nav() {
       <CustomLink href="/" aria-label="Home">
         Home
       </CustomLink>
-      <CustomLink href="/posts" aria-label="Posts">
-        Posts
+      <CustomLink href="/blog" aria-label="Blog">
+        Blog
       </CustomLink>
     </nav>
   );

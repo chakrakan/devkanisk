@@ -1,19 +1,19 @@
-import { Post } from "../.contentlayer/generated/";
+import { Post } from "../.contentlayer/generated";
 import { PostCard, SeoContainer } from "components";
 import { sortedPosts as posts } from "lib/helpers";
 
-export default function Posts({ posts }: { posts: Post[] }) {
+export default function Blog({ posts }: { posts: Post[] }) {
   return (
     <div>
       <SeoContainer
-        title={"Posts | devkanisk"}
+        title={"Blog | devkanisk"}
         description={
-          "A starter template for NextJS leveraging Contentlayer + MDX to get you started fast!"
+          "Thoughts on the software industry, programming, tech, videography, music, and my personal life."
         }
-        url={"devkanisk.com/posts"}
+        url={"devkanisk.com/blog"}
       >
         <div>
-          <h1>Posts</h1>
+          <h1>Blog</h1>
           <p>
             I&apos;ve been writing and taking notes of random subject-matter
             ranging from technical bits to abstract thoughts using various tools
