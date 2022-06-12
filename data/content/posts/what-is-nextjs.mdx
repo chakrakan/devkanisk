@@ -1,0 +1,63 @@
+---
+title: "What is NextJS"
+publishedAt: "March 8, 2022"
+description: "An overview of some basic NextJS concepts"
+tags:
+  - title: NextJS
+  - title: React
+  - title: JavaScript
+  - title: Web-Development
+---
+
+### What is NextJS
+
+A framework built on top of React, gives you the flexibility of building scalable apps by allowing you to **render content on the server** in advanced.
+
+It's a full-stack framework because it provides us a node server out of the box
+
+With **CreateReactApp** - you render content on the line, there's no server side processing
+
+With **NextJs** - you can mix things up for a singular project, do static site generation (SSG) for certain pages, or do server side rendering (SSR) for others, or client-side rendering (Incremental-Site-Regeneration) as well!
+
+#### Different Rendering Techniques
+
+**Static Site Generation** - All content gets [[nextjs-pre-rendering|pre-built]] on the server, cached, and then served to the client. Well suited for static content such as a products page, blog posts, stores, etc. since the cached content is fetched over and over from the server providing great performance
+
+`getStaticProps()` - HTML generated at build time (predownloaded)
+
+**Server Side Rendering** - If data changes dynamically on refresh of the page, then we use server side rendering. Well suited for a dynamic news feed, reddit style forums (w/ upvotes etc.), netflix
+
+`getServersideProps()` - HTML generated for every request
+
+**Incremental Site Generation** - best of both SSG + SSR aka we get to generate the static page in advance on the server, and any dynamic content can be fetched or re-fetched after and updated.
+
+`getStaticProps() with revalidate` - HTML generated at specific interval
+
+#### Performance
+
+- Automatic Code-splitting
+- Minifying files
+- Image optimization (based on viewport, serves optimized images)
+- Prefetching assets (only load stuff above the fold and prefetch content the user is most likely to visit or scroll downt to)
+
+#### Convenience
+
+Create React App needs React Router or something similar to help with routing
+Nextjs has default file base routing system
+
+Specific `api` folder to hold backend logic or server-side code within there
+
+#### SEO
+
+Easier for bots to crawl the page, rank the page, and helps your page appear in places across the web
+`<Head>` component to create [[next-seo|SEO]] friendly content
+
+Bot aware ISR `fallback: true` condition to help SEO, where bots aren't crawling the loading state, but actual fallback content provided during loading/fetching of data to render page.
+
+#### Serverless Functions
+
+Anything within the `api` folder is backend - so we can route to it just like we would for any other api.
+This helps with:
+
+- credential management (no storing on client)
+- cold start -> process -> shutdown (save cost)

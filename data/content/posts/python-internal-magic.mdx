@@ -1,0 +1,39 @@
+---
+title: "Python Internal Magic"
+publishedAt: "Feb 28, 2022"
+description: "Python internal magic with ctypes"
+tags:
+  - title: Programming Languages
+  - title: Python
+  - title: C
+  - title: Memory Management
+---
+
+You can change the value of an integer in memory due to how the Python compiler optimizes int storage.
+
+`int` in python is an object, and for values from -5 to 255 they always refer to the same object in memory for performance. This reference is created in the heap, whereas, in languages like C, the individual `int` would occupy a portion in the stack.
+
+This is where we can leverage the `ctypes` module to create something like this:
+
+```python
+import ctypes
+
+def swap(int_obj: int, value: int) -> None:
+    ctypes.cast(id(int_obj), ctypes.POINTER(ctypes.c_int))[6] = value
+```
+
+This function can change the reference for underlying value within the python int object.
+
+So, if we do something like:
+
+```python
+age = 18
+swap(18, 0)
+print(age)
+```
+
+the initial `18` should be "swapped" and we should end up with `age = 0`.
+
+#### References
+
+- https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/
