@@ -9,10 +9,10 @@ type BaseProps = PropsWithChildren<{
 export default function Base({ children }: BaseProps) {
   return (
     <>
-      <div className="prose-a:text-sky-500 prose-a:no-underline prose-a:transition hover:prose-a:text-sky-600 dark:bg-zinc-900 dark:bg-none dark:prose-a:text-zinc-300 dark:hover:prose-a:text-sky-600 dark:prose-headings:text-slate-200 dark:prose-strong:text-zinc-300 dark:prose-blockquote:text-zinc-300">
-        <div className="max-w-[700px] mx-auto flex flex-col min-h-screen px-8 sm:px-4 prose">
+      <div className="prose-a:text-sky-500 min-h-screen tracking-tight prose-a:no-underline prose-a:transition hover:prose-a:text-sky-600 dark:bg-zinc-900 dark:bg-none dark:prose-a:text-zinc-300 dark:hover:prose-a:text-sky-600 dark:prose-headings:text-slate-200 dark:prose-strong:text-zinc-300 dark:prose-blockquote:text-zinc-300">
+        <div className="max-w-[800px] mx-auto flex flex-col px-8 sm:px-4 prose">
           <Nav />
-          <main className="text-gray-700 prose flex-grow dark:text-zinc-400">
+          <main className="text-gray-700 prose flex flex-col dark:text-zinc-400">
             {children}
           </main>
           <Footer />

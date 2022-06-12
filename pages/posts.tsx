@@ -15,9 +15,16 @@ export default function Posts({ posts }: { posts: Post[] }) {
         <div>
           <h1>Posts</h1>
           <p>
-            I&apos;ve been creating written content across a smattering of
-            web-services since 2020{" "}
+            I&apos;ve been writing and taking notes of random subject-matter
+            ranging from technical bits to abstract thoughts using various tools
+            and services since early 2020.
           </p>
+          <p>
+            The following are a smattering of those thoughts cobbled together
+            into an <em>informal</em>, yet readable format for anyone who dared
+            to venture into this corner of the internet.
+          </p>
+          <p>Happy reading! 📖</p>
           <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
             {posts.map((post) => (
               <PostCard post={post} key={post._id} />

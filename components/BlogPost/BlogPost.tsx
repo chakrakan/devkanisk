@@ -27,7 +27,7 @@ export default function BlogPost({ children, post }: BlogPostProps) {
             <span>{post.publishedAt}</span>
             <span>{post.readingTime ? ` · ${post.readingTime.text}` : ""}</span>
           </p>
-          <hr className="-my-1 border-gray-200 dark:border-zinc-500 mb-8" />
+          <hr className="my-2 border-gray-200 dark:border-zinc-500 mb-8" />
         </div>
         <div className="entry dark:prose-code:text-zinc-300">{children}</div>
       </article>

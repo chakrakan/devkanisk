@@ -22,14 +22,14 @@ export default function Home({ mostRecent }: HomeProps) {
     <SeoContainer
       title={"Home | devkanisk"}
       description={
-        "A starter template for NextJS leveraging Contentlayer + MDX to get you started fast!"
+        "Kanisk is a software engineer based in Toronto, Canada. Welcome to his personal corner on the internet, hope you enjoy your stay!"
       }
-      url={"next-js-mdx-starter.vercel.app"}
+      url={"devkanisk.com"}
     >
-      <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16">
-        <div className="flex flex-col-reverse sm:flex-row items-start">
+      <section className="flex flex-col justify-center">
+        <div className="flex flex-col-reverse sm:flex-row md:items-start">
           <div className="flex flex-col pr-8">
-            <h1 className="text-3xl md:text-5xl tracking-tight mb-1 text-black dark:text-white">
+            <h1 className="text-3xl md:text-5xl mb-1 text-black dark:text-white">
               @devkanisk
             </h1>
             <section>
@@ -48,7 +48,7 @@ export default function Home({ mostRecent }: HomeProps) {
               </p>
             </section>
           </div>
-          <div className="w-[80px] sm:w-[176px] relative mb-8 sm:mb-0 mr-auto">
+          <div className="w-[120px] sm:w-[400px]">
             <Image
               className="rounded-full"
               alt="UI/UX design"
@@ -61,41 +61,39 @@ export default function Home({ mostRecent }: HomeProps) {
             />
           </div>
         </div>
-        <section className="-mt-10">
-          <h2 className="font-bold mt-1 md:text-4xl tracking-tight mb-1 text-black dark:text-white">
-            Recent Posts
-          </h2>
-          <ul className="flex flex-col">
-            {mostRecent.map((post: Post) => (
-              <li key={post.slug}>
-                <CustomLink href={`/posts/${post.slug}`}>
-                  {post.title}
-                </CustomLink>
-              </li>
-            ))}
-          </ul>
-          <CustomLink
-            href="/posts"
-            className="flex mt-2 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
+      </section>
+      <section>
+        <h2 className="font-bold md:text-4xl mb-1 text-black dark:text-white">
+          Recent Posts
+        </h2>
+        <ul className="flex flex-col">
+          {mostRecent.map((post: Post) => (
+            <li key={post.slug}>
+              <CustomLink href={`/posts/${post.slug}`}>{post.title}</CustomLink>
+            </li>
+          ))}
+        </ul>
+        <CustomLink
+          href="/posts"
+          className="flex mt-2 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
+        >
+          Read all posts
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="h-6 w-6 ml-1"
           >
-            Read all posts
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="h-6 w-6 ml-1"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
-              />
-            </svg>
-          </CustomLink>
-        </section>
-      </div>
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
+            />
+          </svg>
+        </CustomLink>
+      </section>
     </SeoContainer>
   );
 }
