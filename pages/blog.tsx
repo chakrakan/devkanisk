@@ -1,9 +1,8 @@
-import { Post } from "../.contentlayer/generated";
 import { PostCard, SeoContainer } from "components";
-import { sortedBlogPosts as posts } from "lib/helpers";
+import { sortedBlogPosts as posts, PickedPost } from "lib/helpers";
 
 type BlogProps = {
-  posts: Post[];
+  posts: PickedPost[];
 };
 
 export default function Blog({ posts }: BlogProps) {
@@ -31,7 +30,7 @@ export default function Blog({ posts }: BlogProps) {
           <p>Happy reading! 📖</p>
           <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
             {posts.map((post) => (
-              <PostCard post={post} key={post._id} />
+              <PostCard post={post} key={post.slug} />
             ))}
           </div>
         </div>

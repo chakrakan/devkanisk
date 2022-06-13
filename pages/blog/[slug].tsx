@@ -1,4 +1,4 @@
-import { allPosts, Post as PostType } from "../../.contentlayer/generated";
+import { allPosts, Post as PostType } from "contentlayer/generated";
 import type { GetStaticProps, GetStaticPaths } from "next/types";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { BlogPost, MDXComponents } from "components";

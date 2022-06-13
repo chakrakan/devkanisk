@@ -15,6 +15,9 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
+    "paths": {
+      "contentlayer/generated": ["./.contentlayer/generated"]
+    },
     "pretty": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,

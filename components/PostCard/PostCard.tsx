@@ -1,8 +1,8 @@
-import { Post } from ".contentlayer/generated";
+import type { PickedPost } from "lib/helpers";
 import CustomLink from "components/CustomLink/CustomLink";
 
 type PostCardProps = {
-  post: Post;
+  post: PickedPost;
 };
 
 export default function PostCard({ post }: PostCardProps) {

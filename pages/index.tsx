@@ -1,4 +1,4 @@
-import { Post } from ".contentlayer/generated";
+import { Post } from "contentlayer/generated";
 import { CustomLink, SeoContainer } from "components";
 import { sortedBlogPosts } from "lib/helpers";
 import type { GetStaticProps } from "next";
@@ -75,7 +75,7 @@ export default function Home({ mostRecent }: HomeProps) {
           ))}
         </ul>
         <CustomLink
-          href="/posts"
+          href="/blog"
           className="flex mt-2 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
         >
           Read all posts

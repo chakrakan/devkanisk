@@ -1,4 +1,4 @@
-import { Post } from ".contentlayer/generated";
+import { Post } from "contentlayer/generated";
 import SeoContainer from "components/SeoContainer/SeoContainer";
 import Tag from "components/Tag/Tag";
 
