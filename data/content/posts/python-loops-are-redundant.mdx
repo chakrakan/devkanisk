@@ -1,0 +1,56 @@
+---
+title: "Python for loops are redundant"
+publishedAt: "Aug 1, 2022"
+description: "Python for loops are kinda just like error prone while loops in disguise"
+tags:
+  - title: Programming Languages
+  - title: Python
+  - title: Trivia
+---
+
+Python for loops are quite useful and nifty...
+
+Something like this is great and easy to use:
+
+```python
+for i in range(10):
+  add_business(name=fake.company())
+```
+
+However, understanding iteration is the key to mastering any programming language.
+
+Let's replace this with a corresponding while loop:
+
+```python
+it = iter(range(10))
+while True:
+  x = next(it)
+  add_business(name=fake.company())
+```
+
+At a glance, it seems like we've created an infinite loop - however, the design decision chosen
+by Python creators involve having the `next()` call raise an exception, in order to specify that
+the iteration is done.
+
+Running the above code as is would add businesses as expected but would end in a `StopIteration` exception.
+With Python, you get an exception within every single for-loop which is hidden away from the user.
+
+In order to truly configure this as a for loop is designed, we'd have to re-write the code as following:
+
+```python
+it = iter(range(10))
+while True:
+  try:
+    x = next(it)
+  except StopIteration:
+    break
+  else:
+    add_business(name=fake.company())
+```
+
+So remember, every single time you use a for-loop like the one we began with in this post, the above is what is
+happening undercover 🕵️
+
+#### References
+
+- https://www.youtube.com/watch?v=Xd760PcgfPg
