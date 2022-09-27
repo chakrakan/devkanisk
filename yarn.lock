@@ -1836,11 +1836,6 @@ function-bind@^1.1.1:
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
-functional-red-black-tree@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz"
-  integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
-
 functions-have-names@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/functions-have-names/-/functions-have-names-1.2.3.tgz"
@@ -4089,10 +4084,10 @@ type-fest@^2.12.1:
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-2.12.2.tgz"
   integrity sha512-qt6ylCGpLjZ7AaODxbpyBZSs9fCI9SkL3Z9q2oxMBQhs/uyY+VD8jHA8ULCGmWQJlBgqvO3EJeAngOHD8zQCrQ==
 
-typescript@4.8.3:
-  version "4.8.3"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.8.3.tgz"
-  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
+typescript@4.8.4:
+  version "4.8.4"
+  resolved "https://registry.npmjs.org/typescript/-/typescript-4.8.4.tgz"
+  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
 
 unbox-primitive@^1.0.1:
   version "1.0.2"
