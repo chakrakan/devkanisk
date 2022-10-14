@@ -1,0 +1,96 @@
+---
+title: "Django Architecture - Connection Management"
+publishedAt: "Oct 12, 2022"
+description: "Let's go over some Backend Django Architecture - it's strenghts and shortcoming based on how connections are managed."
+tags:
+  - title: Python
+  - title: Django
+  - title: ORM
+  - title: Backend
+  - title: Web
+---
+
+With Django, we are able to have a classic 3-tier Architecture setup right out of the box and looks something along the lines of this:
+
+<Image
+  className="rounded-lg"
+  alt="Frontend-Backend-Work"
+  src="/static/post-images/django-architecture/3-tier.svg"
+  width={600}
+  height={250}
+  placeholder="blur"
+  blurDataURL="/static/post-images/django-architecture/3-tier.svg"
+/>
+In this diagram, we have clients connecting via some listener that listens for connection
+requests. Let's say our client performs a GET request - the kernel wlll load balnce
+this to multiple threads (in our case, we have 3 worker threads for our app server).
+
+The thread picks it up, parses and understands we have a `GET` request incoming, it turns around and have some data that needs fetching from the DB.
+
+**This** is when Django creates a connection to the database, ONLY upon needing to connect to the database, it doesn't do so on startup
+
+At this point, the TCP connection to the DB will be handled (3-way-handshake) - the cost of the DB connection will be incurred on the request itself.
+
+<Image
+  className="rounded-lg"
+  alt="Frontend-Backend-Work"
+  src="/static/post-images/django-architecture/thread.svg"
+  width={600}
+  height={250}
+  placeholder="blur"
+  blurDataURL="/static/post-images/django-architecture/thread.svg"
+/>
+
+After this, Django writes the response to the client socket - building the HTTPReponse to the client.
+Once this whole process is done, it closes the backend connection.
+
+The goal with a Django backend was to minimize the number of database connections, as no. of connections directly relate to the load/usage of the DB.
+
+This was true maybe 10 years ago, but this is no longer as effective. People have moved to persisted connections.
+
+That's how HTTP 1.0 worked - and we got around using Keepalive. HTTP 2.0 changed all of that with connections always alive, sending tons of streamed multiplex requests
+and connections.
+
+If we are "chatty" with the DB, we need persisted connectinos.
+
+In Django, we can use a `CONN_MAX_AGE` variable and set its value to `None` to not terminate DB level connections and keep them persisting.
+The connection will remain alive until it fails (network failure/socket closure).
+
+From the Django documentation, Django persisted connections still have limitations - if you have one thread, you still only get one connection aka **One connection per thread model**.
+
+Due to this, the burden of responsibility now falls under how your front-end listening model is.
+
+Assuming our front-end listening is also one thread per client as well, our scenario looks something like this:
+
+<Image
+  className="rounded-lg"
+  alt="Frontend-Backend-Work"
+  src="/static/post-images/django-architecture/waiting.svg"
+  width={600}
+  height={250}
+  placeholder="blur"
+  blurDataURL="/static/post-images/django-architecture/waiting.svg"
+/>
+
+These requests are async, yet I/O operations on the thread limits it from taking another request that requires something from the DB as welll.
+Yes, the thread if "free" to do other stuff, but **what?**
+
+An example is if one of these other requests don't have anything to do with the DB, but are reading from a cache, or are computing a hash. This same thread can happily perform these aditional tasks as long as they are asynchronously communicated.
+
+However, if majority of your requests require DB reads/writes, then the primary purpose for these threads is to handle connections and process I/O. Now if we have another request coming in which would require DB access, while the
+thread is still handling a previous I/O request to the DB, then we essentially have to **wait**, and in-turn, keep the client **waiting**.
+
+Quite obvious why this design was done since not all DBs can handle pipelined SQL queries and Django wants to provide us Consistency. You can run into anomal reads/writes depending on which query got excuted faster, directly messing with our DB consistency.
+We trade off availability for consistency.
+
+> NOTE: Postgres 14 supports pipelined SQL statements
+
+Most of the time, we cannot guarantee we can do this with our DB.
+
+So what can you do in this situation where you need threads to perform lots of I/O with the DB?
+
+Spin up more threads for Django!
+
+You can do this uptill a certain number of threads based on hardware - after that there'll be a severe degradation in performance.
+General recommendation from NGINX is 1 thread/core (2 if hyperthreading enabled). If you had 100 threads for 4 cores, the cost of context switch
+the CPU inccurs for these threads across the 4 cores will kill performance (this is assuming Django is the only thing running on this system).
