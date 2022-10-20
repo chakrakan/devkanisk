@@ -5,6 +5,7 @@ import MDXComponents from "./MDXComponents/MDXComponents";
 import SeoContainer from "./SeoContainer/SeoContainer";
 import PostCard from "./PostCard/PostCard";
 import Tag from "./Tag/Tag";
+import ViewCounter from "./ViewCounter/ViewCounter";
 
 export {
   Base,
@@ -14,4 +15,5 @@ export {
   SeoContainer,
   PostCard,
   Tag,
+  ViewCounter,
 };
