@@ -20,6 +20,7 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": 0,
-    "require-jsdoc": 0
+    "require-jsdoc": 0,
+    "no-new": 0
   }
 }
