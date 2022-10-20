@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { PostCard, SeoContainer } from "components";
 import { sortedBlogPosts as posts, PickedPost } from "lib/helpers";
 
@@ -62,13 +62,15 @@ export default function Blog({ posts }: BlogProps) {
           {!searchValue &&
             posts.map((post) => <PostCard post={post} key={post.slug} />)}
         </div>
-        {!filteredBlogPosts.length && (
-          <p className="text-gray-600 dark:text-gray-400">No posts found.</p>
-        )}
-        {searchValue &&
-          filteredBlogPosts.map((post) => (
-            <PostCard post={post} key={post.slug} />
-          ))}
+        <Suspense fallback={null}>
+          {!filteredBlogPosts.length && (
+            <p className="text-gray-600 dark:text-gray-400">No posts found.</p>
+          )}
+          {searchValue &&
+            filteredBlogPosts.map((post) => (
+              <PostCard post={post} key={post.slug} />
+            ))}
+        </Suspense>
       </SeoContainer>
     </div>
   );

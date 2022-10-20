@@ -12,3 +12,7 @@ export type NowPlayingSong = {
   songUrl: string;
   title: string;
 };
+
+export type Views = {
+  total: number;
+};
