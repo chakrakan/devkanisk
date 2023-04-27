@@ -1,6 +1,6 @@
 # devkanisk-v1
 
-My site/blog based on my NextJS boilerplate. New version being written in Astro.
+My site/blog based on my NextJS boilerplate. New version written in Astro.
 
 ## Getting Started
 
